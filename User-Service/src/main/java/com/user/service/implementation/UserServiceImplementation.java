@@ -7,10 +7,13 @@ import com.user.service.exceptions.ResourceNotFoundException;
 import com.user.service.repositary.UserRepositary;
 import com.user.service.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 
+@Service
 public class UserServiceImplementation implements UserService {
 
     @Autowired
@@ -18,6 +21,7 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public User createUser(User user) {
+        user.setUserId(UUID.randomUUID().toString());
         User savedUser = this.userRepositary.save(user);
         return savedUser;
     }
@@ -34,9 +38,9 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public void deleteUser(String userId) {
-        User user = this.userRepositary.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found whit this userId : " + userId));
-        this.userRepositary.delete(user);
+    public void deleteUser(User user) {
+        User user1 = this.userRepositary.findById(user.getUserId()).orElseThrow(() -> new ResourceNotFoundException("User not found whit this userId : " + user.getUserId()));
+        this.userRepositary.delete(user1);
     }
 
     @Override

@@ -9,18 +9,19 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class Rating {
+@NoArgsConstructor
+public class Hotel {
 
-    private String ratingId;
 
-    private String userId;
+    private String id;
 
-    private String hotelId;
 
-    private String rating;
+    private String name;
 
-    private Hotel hotel;
+    private String location;
+
+
+    private String about;
 
 }
